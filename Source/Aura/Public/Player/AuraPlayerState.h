@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
 #include "GameFramework/PlayerState.h"
+#include "AbilitySystemComponent.h"
+#include "AttributeSet.h"
 #include "AuraPlayerState.generated.h"
 
 class UAbilitySystemComponent;
