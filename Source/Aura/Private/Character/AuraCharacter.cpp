@@ -6,6 +6,7 @@
 #include <Player\AuraPlayerState.h>
 #include <Player\AuraPlayerController.h>
 #include <UI\HUD\AuraHUD.h>
+#include <AbilitySystem\AuraAbilitySystemComponent.h>
 
 AAuraCharacter::AAuraCharacter()
 {
@@ -24,7 +25,7 @@ void AAuraCharacter::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 
 	// Init Ability Actor Info for the server
-	InitiAbilityActorInfo();
+	InitAbilityActorInfo();
 }
 
 void AAuraCharacter::OnRep_PlayerState()
@@ -32,16 +33,17 @@ void AAuraCharacter::OnRep_PlayerState()
 	Super::OnRep_PlayerState();
 
 	// Init Ability Actor Info for the client
-	InitiAbilityActorInfo();
+	InitAbilityActorInfo();
 }
 
-void AAuraCharacter::InitiAbilityActorInfo()
+void AAuraCharacter::InitAbilityActorInfo()
 {
 	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	check(AuraPlayerState);
 
 	// Init 
 	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
+	Cast<UAuraAbilitySystemComponent>(AuraPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 
 	// Set private variables
 	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
