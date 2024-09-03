@@ -25,7 +25,7 @@ void UAttributeMenuWidgetController::BindCallbacksToDependencies()
 
 void UAttributeMenuWidgetController::BroadcastInitialValues()
 {
-	UAuraAttributeSet* AS = CastChecked<UAuraAttributeSet>(AttributeSet);
+	UAuraAttributeSet* AS = CastChecked<UAuraAttributeSet>(AttributeSet); 
 
 	check(AttributeInfo);
 	
