@@ -40,7 +40,7 @@ struct FEffectProperties
 	ACharacter* SourceCharacter = nullptr;
 	/* Source Info */
 
-	/* Traget Info */
+	/* Target Info */
 	UPROPERTY()
 	UAbilitySystemComponent* TargetASC = nullptr;
 
@@ -52,7 +52,7 @@ struct FEffectProperties
 
 	UPROPERTY()
 	ACharacter* TargetCharacter = nullptr;
-	/* Traget Info */
+	/* Target Info */
 };
 
 // typedef is specific to the FGameplayAttribute() signature, but TStaticFuncPtr is generic to any signature chosen
