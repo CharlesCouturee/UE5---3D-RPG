@@ -6,6 +6,7 @@
 #include "GameplayEffect.h"
 #include <AbilitySystem\AuraAbilitySystemComponent.h>
 #include "Components\CapsuleComponent.h"
+#include <Aura\Aura.h>
 
 
 AAuraCharacterBase::AAuraCharacterBase()
@@ -14,6 +15,8 @@ AAuraCharacterBase::AAuraCharacterBase()
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECollisionResponse::ECR_Overlap);
+	GetMesh()->SetGenerateOverlapEvents(true);
 
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
