@@ -101,16 +101,16 @@ void AAuraCharacterBase::MulticastHandleDeath_Implementation()
 
 void AAuraCharacterBase::Disolve()
 {
-	if (IsValid(DisolveMaterialInstance))
+	if (IsValid(DissolveMaterialInstance))
 	{
-		UMaterialInstanceDynamic* DynamicMatInst = UMaterialInstanceDynamic::Create(DisolveMaterialInstance, this);
+		UMaterialInstanceDynamic* DynamicMatInst = UMaterialInstanceDynamic::Create(DissolveMaterialInstance, this);
 		GetMesh()->SetMaterial(0, DynamicMatInst);
 
 		StartDissolveTimeline(DynamicMatInst);
 	}
-	if (IsValid(WeaponDisolveMaterialInstance))
+	if (IsValid(WeaponDissolveMaterialInstance))
 	{
-		UMaterialInstanceDynamic* WeaponDynamicMatInst = UMaterialInstanceDynamic::Create(WeaponDisolveMaterialInstance, this);
+		UMaterialInstanceDynamic* WeaponDynamicMatInst = UMaterialInstanceDynamic::Create(WeaponDissolveMaterialInstance, this);
 		Weapon->SetMaterial(0, WeaponDynamicMatInst);
 
 		StartWeaponDissolveTimeline(WeaponDynamicMatInst);
