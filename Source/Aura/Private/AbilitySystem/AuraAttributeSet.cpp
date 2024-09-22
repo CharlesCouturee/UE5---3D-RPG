@@ -10,6 +10,7 @@
 #include <Interaction\CombatInterface.h>
 #include <Kismet\GameplayStatics.h>
 #include <Player\AuraPlayerController.h>
+#include <AbilitySystem\AuraAbilitySystemLibrary.h>
 
 UAuraAttributeSet::UAuraAttributeSet()
 {
@@ -116,13 +117,16 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 				TagContainer.AddTag(FAuraGameplayTags::Get().Effects_HitReact);
 				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
 			}
+	
+			const bool bBlocked = UAuraAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
+			const bool bCriticalHit = UAuraAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);
 
-			ShowFloatingText(Props, LocalIncomingDamage);
+			ShowFloatingText(Props, LocalIncomingDamage, bBlocked, bCriticalHit);
 		}
 	}
 }
 
-void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage) const
+void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit, bool bCriticalHit) const
 {
 	if (Props.SourceCharacter != Props.TargetCharacter)
 	{

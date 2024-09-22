@@ -8,6 +8,7 @@
 #include <Game\AuraGameModeBase.h>
 #include <AbilitySystem\AuraAbilitySystemLibrary.h>
 #include <Interaction\CombatInterface.h>
+#include <AuraAbilityTypes.h>
 
 struct AuraDamageStatics
 {
@@ -69,9 +70,13 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	float TargetBlockChance = 0.f;
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().BlockChanceDef, EvaluationParameters, TargetBlockChance);
 	TargetBlockChance = FMath::Max<float>(0.f, TargetBlockChance);
+	
+	const bool bBlocked = FMath::RandRange(1, 100) < TargetBlockChance;
+
+	FGameplayEffectContextHandle EffectContextHandle = Spec.GetContext();
+	UAuraAbilitySystemLibrary::SetIsBlockedHit(EffectContextHandle, bBlocked);
 
 	// If Block, halve the damage
-	const bool bBlocked = FMath::RandRange(1, 100) < TargetBlockChance;
 	Damage = bBlocked ? Damage / 2.f : Damage;
 	/* BLOCK CHANCE */
 
@@ -109,7 +114,6 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	float SourceCriticalHitDamage = 0.f;
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CriticalHitDamageDef, EvaluationParameters, SourceCriticalHitDamage);
 	SourceCriticalHitDamage = FMath::Max<float>(0.f, SourceCriticalHitDamage);
-	/* CRITICAL HIT */
 
 	const FRealCurve* CriticalHitResistanceCurve = CharacterClassInfo->DamageCalculationCoefficients->FindCurve(FName("CriticalHitResistance"), FString());
 	const float CriticalHitResistanceCoefficient = CriticalHitResistanceCurve->Eval(TargetCombatInterface->GetPlayerLevel());
@@ -118,8 +122,11 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	const float EffectiveCriticalHitChance = SourceCriticalHitChance - TargetCriticalHitResistance * CriticalHitResistanceCoefficient;
 	const bool bCriticalHit = FMath::RandRange(1, 100) < EffectiveCriticalHitChance;
 
+	UAuraAbilitySystemLibrary::SetIsCriticalHit(EffectContextHandle, bCriticalHit);
+
 	// Double Damage + bonus if critical hit
 	Damage = bCriticalHit ? Damage * 2.f + SourceCriticalHitDamage : Damage;
+	/* CRITICAL HIT */
 
 	// Output final Damage Value 
 	const FGameplayModifierEvaluatedData EvaluatedData(UAuraAttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, Damage);
