@@ -100,15 +100,15 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FName("Damage.Fire"),
 		FString("Fire Damage Type"));
 
-	GameplayTags.Damage_Fire = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	GameplayTags.Damage_Lightning = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Damage.Lightning"),
 		FString("Lightning Damage Type"));
 
-	GameplayTags.Damage_Fire = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	GameplayTags.Damage_Arcane = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Damage.Arcane"),
 		FString("Arcane Damage Type"));
 
-	GameplayTags.Damage_Fire = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	GameplayTags.Damage_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Damage.Physical"),
 		FString("Physical Damage Type"));
 
