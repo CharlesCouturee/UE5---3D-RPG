@@ -113,7 +113,6 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 		DamageTypeValue *= (100.f - Resistance) / 100.f;
 
 		Damage += DamageTypeValue;
-		UE_LOG(LogTemp, Warning, TEXT("%f"), Damage);
 	}
 
 	/* BLOCK CHANCE */
