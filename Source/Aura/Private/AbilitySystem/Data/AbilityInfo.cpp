@@ -2,7 +2,7 @@
 
 
 #include "AbilitySystem/Data/AbilityInfo.h"
-#include "Aura\AuraLogChannels.h"
+//#include "Aura\AuraLogChannels.h"
 
 
 FAuraAbilityInfo UAbilityInfo::FindAbilityInforForTag(FGameplayTag& AbilityTag, bool bLogNotFound)
@@ -17,7 +17,7 @@ FAuraAbilityInfo UAbilityInfo::FindAbilityInforForTag(FGameplayTag& AbilityTag, 
 
 	if (bLogNotFound)
 	{
-		UE_LOG(LogAura, Error, TEXT("Can't find info for AbilityTag %s for AbilityInfo %s"), *AbilityTag.ToString(), *GetNameSafe(this));
+		//UE_LOG(LogAura, Error, TEXT("Can't find info for AbilityTag %s for AbilityInfo %s"), *AbilityTag.ToString(), *GetNameSafe(this));
 	}
 
 	return FAuraAbilityInfo();
