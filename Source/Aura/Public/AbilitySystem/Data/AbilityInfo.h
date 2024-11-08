@@ -34,5 +34,5 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AbilityInformation")
 	TArray<FAuraAbilityInfo> AbilityInformation;
 
-	FAuraAbilityInfo FindAbilityInforForTag(FGameplayTag& AbilityTag, bool bLogNotFound = false);
+	FAuraAbilityInfo FindAbilityInforForTag(const FGameplayTag& AbilityTag, bool bLogNotFound = false) const;
 };
